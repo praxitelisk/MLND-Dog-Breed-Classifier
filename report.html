@@ -13154,7 +13154,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_files</span>       
@@ -13234,7 +13234,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -13284,7 +13284,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>                
@@ -13368,7 +13368,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># returns &quot;True&quot; if face is detected in image stored at img_path</span>
@@ -13400,7 +13400,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">human_files_short</span> <span class="o">=</span> <span class="n">human_files</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
@@ -13455,7 +13455,7 @@ Number of Human Face detected = 12 and % of mis-classified Dogs having Human fac
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span> <span class="n">train_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
@@ -13508,13 +13508,87 @@ Number of Human Face detected = 12 and % of mis-classified Dogs having Human fac
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Using-alternatives-OpenCV-face-Detectors">Using alternatives OpenCV face Detectors<a class="anchor-link" href="#Using-alternatives-OpenCV-face-Detectors">&#182;</a></h3><blockquote><p>haarcascades frontalface detectors, source link: <a href="https://github.com/opencv/opencv/tree/master/data/haarcascades">https://github.com/opencv/opencv/tree/master/data/haarcascades</a></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Using alternative face detector available in OpenCV</span>
+<span class="c1">#### haarcascades frontalface detectors source link: https://github.com/opencv/opencv/tree/master/data/haarcascades</span>
+    
+<span class="n">classifiers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;haarcascade_frontalface_alt.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;haarcascade_frontalface_alt2.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;haarcascade_frontalface_alt_tree.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;haarcascade_frontalface_default.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;haarcascade_profileface.xml&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">:</span> 
+    <span class="n">face_cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="s1">&#39;haarcascades/&#39;</span><span class="o">+</span><span class="n">classifier</span><span class="p">)</span>
+    <span class="c1"># returns &quot;True&quot; if face is detected in image stored at img_path</span>
+    <span class="k">def</span> <span class="nf">face_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+        <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="n">face_cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">gray</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="n">humans</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span> <span class="n">hum</span> <span class="k">for</span> <span class="n">hum</span> <span class="ow">in</span> <span class="n">human_files_short</span> <span class="k">if</span> <span class="n">face_detector</span><span class="p">(</span><span class="n">hum</span><span class="p">)])</span>
+    <span class="n">dogs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">dog</span> <span class="k">for</span> <span class="n">dog</span> <span class="ow">in</span> <span class="n">dog_files_short</span> <span class="k">if</span> <span class="n">face_detector</span><span class="p">(</span><span class="n">dog</span><span class="p">)])</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using Classifier </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Correctly classified humans = </span><span class="si">{}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">Mis-classified Dogs = </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span><span class="n">humans</span><span class="p">,</span><span class="n">dogs</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Using Classifier haarcascade_frontalface_alt.xml 
+Correctly classified humans = 99%
+Mis-classified Dogs = 12%
+
+Using Classifier haarcascade_frontalface_alt2.xml 
+Correctly classified humans = 100%
+Mis-classified Dogs = 19%
+
+Using Classifier haarcascade_frontalface_alt_tree.xml 
+Correctly classified humans = 57%
+Mis-classified Dogs = 1%
+
+Using Classifier haarcascade_frontalface_default.xml 
+Correctly classified humans = 100%
+Mis-classified Dogs = 54%
+
+Using Classifier haarcascade_profileface.xml 
+Correctly classified humans = 40%
+Mis-classified Dogs = 3%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Using-an-alternative-face-detector-with-Keras">Using an alternative face detector with Keras<a class="anchor-link" href="#Using-an-alternative-face-detector-with-Keras">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
@@ -13601,31 +13675,31 @@ Number of Human Face detected = 12 and % of mis-classified Dogs having Human fac
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_1 (Conv2D)            (None, 112, 112, 16)      208       
+conv2d_7 (Conv2D)            (None, 112, 112, 16)      208       
 _________________________________________________________________
-activation_50 (Activation)   (None, 112, 112, 16)      0         
+activation_7 (Activation)    (None, 112, 112, 16)      0         
 _________________________________________________________________
-max_pooling2d_2 (MaxPooling2 (None, 56, 56, 16)        0         
+max_pooling2d_7 (MaxPooling2 (None, 56, 56, 16)        0         
 _________________________________________________________________
-conv2d_2 (Conv2D)            (None, 28, 28, 32)        2080      
+conv2d_8 (Conv2D)            (None, 28, 28, 32)        2080      
 _________________________________________________________________
-activation_51 (Activation)   (None, 28, 28, 32)        0         
+activation_8 (Activation)    (None, 28, 28, 32)        0         
 _________________________________________________________________
-max_pooling2d_3 (MaxPooling2 (None, 14, 14, 32)        0         
+max_pooling2d_8 (MaxPooling2 (None, 14, 14, 32)        0         
 _________________________________________________________________
-conv2d_3 (Conv2D)            (None, 7, 7, 64)          8256      
+conv2d_9 (Conv2D)            (None, 7, 7, 64)          8256      
 _________________________________________________________________
-activation_52 (Activation)   (None, 7, 7, 64)          0         
+activation_9 (Activation)    (None, 7, 7, 64)          0         
 _________________________________________________________________
-max_pooling2d_4 (MaxPooling2 (None, 3, 3, 64)          0         
+max_pooling2d_9 (MaxPooling2 (None, 3, 3, 64)          0         
 _________________________________________________________________
-global_average_pooling2d_1 ( (None, 64)                0         
+global_average_pooling2d_3 ( (None, 64)                0         
 _________________________________________________________________
-dropout_1 (Dropout)          (None, 64)                0         
+dropout_3 (Dropout)          (None, 64)                0         
 _________________________________________________________________
-dense_1 (Dense)              (None, 128)               8320      
+dense_5 (Dense)              (None, 128)               8320      
 _________________________________________________________________
-dense_2 (Dense)              (None, 2)                 258       
+dense_6 (Dense)              (None, 2)                 258       
 =================================================================
 Total params: 19,122
 Trainable params: 19,122
@@ -13641,7 +13715,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">ModelCheckpoint</span><span class="p">,</span> <span class="n">EarlyStopping</span>
@@ -13656,7 +13730,7 @@ _________________________________________________________________
                                <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">)</span>
 
 <span class="n">hist</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_all_x</span><span class="p">,</span> <span class="n">train_all_y</span><span class="p">,</span> 
-                 <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span> <span class="n">checkpointer</span><span class="p">],</span> 
+                 <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="n">checkpointer</span><span class="p">],</span> 
                  <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> 
                  <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
                  <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
@@ -13679,33 +13753,101 @@ _________________________________________________________________
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Train on 800 samples, validate on 200 samples
 Epoch 1/100
-800/800 [==============================] - 18s 23ms/step - loss: 1.9789 - acc: 0.6238 - val_loss: 0.0397 - val_acc: 0.9900
+800/800 [==============================] - 5s 6ms/step - loss: 6.3183 - acc: 0.5837 - val_loss: 16.1181 - val_acc: 0.0000e+00
 
-Epoch 00001: val_loss improved from inf to 0.03970, saving model to saved_models/best_human_face_detector.best.hdf5
+Epoch 00001: val_loss improved from inf to 16.11810, saving model to saved_models/best_human_face_detector.best.hdf5
 Epoch 2/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.5961 - acc: 0.7638 - val_loss: 0.9347 - val_acc: 0.5850
+800/800 [==============================] - 3s 4ms/step - loss: 4.1435 - acc: 0.5887 - val_loss: 0.7008 - val_acc: 0.6200
 
-Epoch 00002: val_loss did not improve from 0.03970
+Epoch 00002: val_loss improved from 16.11810 to 0.70078, saving model to saved_models/best_human_face_detector.best.hdf5
 Epoch 3/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.4722 - acc: 0.7925 - val_loss: 0.2764 - val_acc: 0.9000
+800/800 [==============================] - 3s 4ms/step - loss: 0.8734 - acc: 0.6362 - val_loss: 1.2323 - val_acc: 0.2800
 
-Epoch 00003: val_loss did not improve from 0.03970
+Epoch 00003: val_loss did not improve from 0.70078
 Epoch 4/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.4155 - acc: 0.8475 - val_loss: 0.2529 - val_acc: 0.9000
+800/800 [==============================] - 3s 4ms/step - loss: 0.5833 - acc: 0.7037 - val_loss: 1.3770 - val_acc: 0.2550
 
-Epoch 00004: val_loss did not improve from 0.03970
+Epoch 00004: val_loss did not improve from 0.70078
 Epoch 5/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.2795 - acc: 0.9062 - val_loss: 0.0818 - val_acc: 0.9750
+800/800 [==============================] - 3s 4ms/step - loss: 0.5229 - acc: 0.7800 - val_loss: 0.3483 - val_acc: 0.8350
 
-Epoch 00005: val_loss did not improve from 0.03970
+Epoch 00005: val_loss improved from 0.70078 to 0.34831, saving model to saved_models/best_human_face_detector.best.hdf5
 Epoch 6/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.2617 - acc: 0.9075 - val_loss: 1.1760 - val_acc: 0.6150
+800/800 [==============================] - 3s 4ms/step - loss: 0.4707 - acc: 0.7937 - val_loss: 0.2371 - val_acc: 0.8950
 
-Epoch 00006: val_loss did not improve from 0.03970
+Epoch 00006: val_loss improved from 0.34831 to 0.23710, saving model to saved_models/best_human_face_detector.best.hdf5
 Epoch 7/100
-800/800 [==============================] - 3s 4ms/step - loss: 0.2929 - acc: 0.8912 - val_loss: 0.4942 - val_acc: 0.7600
+800/800 [==============================] - 3s 4ms/step - loss: 0.4038 - acc: 0.8300 - val_loss: 0.4296 - val_acc: 0.7800
 
-Epoch 00007: val_loss did not improve from 0.03970
+Epoch 00007: val_loss did not improve from 0.23710
+Epoch 8/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.3148 - acc: 0.8813 - val_loss: 0.4394 - val_acc: 0.8000
+
+Epoch 00008: val_loss did not improve from 0.23710
+Epoch 9/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.3811 - acc: 0.8625 - val_loss: 0.3364 - val_acc: 0.8250
+
+Epoch 00009: val_loss did not improve from 0.23710
+Epoch 10/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2792 - acc: 0.9100 - val_loss: 1.8945 - val_acc: 0.3200
+
+Epoch 00010: val_loss did not improve from 0.23710
+Epoch 11/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2728 - acc: 0.8962 - val_loss: 0.3211 - val_acc: 0.8550
+
+Epoch 00011: val_loss did not improve from 0.23710
+Epoch 12/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2189 - acc: 0.9113 - val_loss: 0.3563 - val_acc: 0.8450
+
+Epoch 00012: val_loss did not improve from 0.23710
+Epoch 13/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2773 - acc: 0.9000 - val_loss: 0.4683 - val_acc: 0.7550
+
+Epoch 00013: val_loss did not improve from 0.23710
+Epoch 14/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2116 - acc: 0.9312 - val_loss: 0.1451 - val_acc: 0.9400
+
+Epoch 00014: val_loss improved from 0.23710 to 0.14511, saving model to saved_models/best_human_face_detector.best.hdf5
+Epoch 15/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2345 - acc: 0.9088 - val_loss: 0.3102 - val_acc: 0.8850
+
+Epoch 00015: val_loss did not improve from 0.14511
+Epoch 16/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1435 - acc: 0.9425 - val_loss: 0.0062 - val_acc: 1.0000
+
+Epoch 00016: val_loss improved from 0.14511 to 0.00620, saving model to saved_models/best_human_face_detector.best.hdf5
+Epoch 17/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.2544 - acc: 0.9150 - val_loss: 0.1491 - val_acc: 0.9400
+
+Epoch 00017: val_loss did not improve from 0.00620
+Epoch 18/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1708 - acc: 0.9438 - val_loss: 0.1540 - val_acc: 0.9400
+
+Epoch 00018: val_loss did not improve from 0.00620
+Epoch 19/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1672 - acc: 0.9375 - val_loss: 0.2312 - val_acc: 0.9100
+
+Epoch 00019: val_loss did not improve from 0.00620
+Epoch 20/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1328 - acc: 0.9550 - val_loss: 0.2120 - val_acc: 0.9100
+
+Epoch 00020: val_loss did not improve from 0.00620
+Epoch 21/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1810 - acc: 0.9425 - val_loss: 0.2767 - val_acc: 0.8800
+
+Epoch 00021: val_loss did not improve from 0.00620
+Epoch 22/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1703 - acc: 0.9487 - val_loss: 0.3068 - val_acc: 0.8600
+
+Epoch 00022: val_loss did not improve from 0.00620
+Epoch 23/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1097 - acc: 0.9600 - val_loss: 0.0959 - val_acc: 0.9550
+
+Epoch 00023: val_loss did not improve from 0.00620
+Epoch 24/100
+800/800 [==============================] - 3s 4ms/step - loss: 0.1518 - acc: 0.9537 - val_loss: 0.3179 - val_acc: 0.8750
+
+Epoch 00024: val_loss did not improve from 0.00620
 </pre>
 </div>
 </div>
@@ -13716,7 +13858,7 @@ Epoch 00007: val_loss did not improve from 0.03970
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;saved_models/best_human_face_detector.best.hdf5&#39;</span><span class="p">)</span>
@@ -13729,12 +13871,12 @@ Epoch 00007: val_loss did not improve from 0.03970
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># evaluate and print test accuracy</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_all_x</span><span class="p">,</span> <span class="n">test_all_y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;Test accuracy:&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;Test accuracy:&#39;</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13752,7 +13894,7 @@ Epoch 00007: val_loss did not improve from 0.03970
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
- Test accuracy: 0.5565565565565566
+ Test accuracy: 79.07907907907908 %
 </pre>
 </div>
 </div>
@@ -13760,6 +13902,24 @@ Epoch 00007: val_loss did not improve from 0.03970
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Answering-Questing-2:">Answering Questing 2:<a class="anchor-link" href="#Answering-Questing-2:">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I think that we should not communicate with the users to provide a clear view of face for the algorithm to accept it, because the variety of  face detectors have a main feature that a model is its discriminative feature to accurately differentiate faces from the backgrounds. The original Open CV implementation uses the Haar features which fastly detects frontal faces. However due to simple nature of Haar feature,it is relatively weak in uncontrolled enviroments, such as large visual variations, different poses, expressions and light variations. In general, it is hard to get clear view of a face, the faces might be not centered, off-focus, side views etc. so it will be reasonable for the developer to take all these complecities into consideration while designing the algorithm for face detection and fine tune the model.</p>
+<p>We can see that for the same inputs the different haarcascade face detectors performance vary a lot. Also, we can see that our custom CNN model also has a decent accuracy score, though it is trained on a subset of the actual data.</p>
+<p>I believe that we would be able to train a model that could recognise the human face with reasonable accuracy. For instance the custom CNN above, with a subset of the dataset had a almost 80% accuracy. With more experimentation we can achieve even more and avoid overfitting.</p>
+<p>Overall, OpenCV's Haar Cascade algorithms/classifiers are extremely fast and it gives a quick and good way for face detection. Thus, I believe that using opencv's Haar cascade of classifier is a good option for this scenario.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13807,7 +13967,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="k">import</span> <span class="n">image</span>                  
@@ -14005,7 +14165,7 @@ Number of Dogs detected = 100 and % of Dogs correctly classified is = 100%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFile</span>                            
@@ -14031,9 +14191,9 @@ Number of Dogs detected = 100 and % of Dogs correctly classified is = 100%
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████████████████████████████████████████████████████████████████████████| 6680/6680 [01:21&lt;00:00, 81.53it/s]
-100%|████████████████████████████████████████████████████████████████████████████████| 835/835 [00:29&lt;00:00, 27.95it/s]
-100%|████████████████████████████████████████████████████████████████████████████████| 836/836 [00:22&lt;00:00, 37.50it/s]
+<pre>100%|██████████████████████████████████████████████████████████████████████████████| 6680/6680 [02:56&lt;00:00, 37.88it/s]
+100%|████████████████████████████████████████████████████████████████████████████████| 835/835 [01:54&lt;00:00,  7.31it/s]
+100%|████████████████████████████████████████████████████████████████████████████████| 836/836 [00:43&lt;00:00, 19.19it/s]
 </pre>
 </div>
 </div>
@@ -14054,31 +14214,49 @@ Number of Dogs detected = 100 and % of Dogs correctly classified is = 100%
 <p><img src="images/sample_cnn.png" alt="Sample CNN"></p>
 <p><strong>Question 4:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  If you chose to use the hinted architecture above, describe why you think that CNN architecture should work well for the image classification task.</p>
 <p><strong>Answer:</strong></p>
+<p>I have worked on various examples to train a deep learning model, and study a few architectures. Also I was aided by the image about the CNN architecture in the previous post and I was inspired by the youtube video from udacity about CNN <a href="https://youtu.be/h5R_JvdUrUI">source</a>. In most of the cases I found that the idea is to get a good accuracy while keeping a simple architecture.</p>
+<ol>
+<li><p>I found that the kernel_size is an important feature that we could start with a bigger window size and then gradually decreasing the size to capture the minute details.</p>
+</li>
+<li><p>Another observation is to use a MaxPool layer after the convolution layer, to reduce the number of features to train and finally a global_average_pooling layer is prefered over flattern layer before passing the features into a Dense layer.</p>
+</li>
+<li><p>The final activation function is preferd to be 'softmax' in cases we want multi class/label as output, and relu could be used at other layers.</p>
+</li>
+<li><p>A dropout layer after every alternate convolution layer of atleast before feeding to Dense layer is useful (as it reduces chances of overfitting)</p>
+</li>
+</ol>
+<p>However, the accuracy with this architecture is not much as it is losing most of the information and couldn't converge completely. The last Softmax layer is used to predict required 133 classes.</p>
+<p>Based on these points in mind, I have designed the following model.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">GlobalAveragePooling2D</span>
-<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span><span class="n">Activation</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">BatchNormalization</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span> <span class="c1"># Normalize the activations of the previous layer at each batch, i.e. applies a transformation that maintains the mean activation close to 0 and the activation standard deviation close to 1.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># Max pooling operation  for spatial data.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">))</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span> <span class="c1"># Normalize the activations of the previous layer at each batch, i.e. applies a transformation that maintains the mean activation close to 0 and the activation standard deviation close to 1.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># Max pooling operation for spatial data.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">))</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span> <span class="c1"># Normalize the activations of the previous layer at each batch, i.e. applies a transformation that maintains the mean activation close to 0 and the activation standard deviation close to 1.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># Max pooling operation for decreasing the spatial data.</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">())</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">))</span>
 
@@ -14107,35 +14285,45 @@ Number of Dogs detected = 100 and % of Dogs correctly classified is = 100%
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_4 (Conv2D)            (None, 221, 221, 16)      784       
+conv2d_16 (Conv2D)           (None, 224, 224, 16)      784       
 _________________________________________________________________
-activation_53 (Activation)   (None, 221, 221, 16)      0         
+activation_18 (Activation)   (None, 224, 224, 16)      0         
 _________________________________________________________________
-max_pooling2d_5 (MaxPooling2 (None, 110, 110, 16)      0         
+batch_normalization_7 (Batch (None, 224, 224, 16)      64        
 _________________________________________________________________
-conv2d_5 (Conv2D)            (None, 108, 108, 32)      4640      
+max_pooling2d_16 (MaxPooling (None, 112, 112, 16)      0         
 _________________________________________________________________
-activation_54 (Activation)   (None, 108, 108, 32)      0         
+dropout_10 (Dropout)         (None, 112, 112, 16)      0         
 _________________________________________________________________
-max_pooling2d_6 (MaxPooling2 (None, 54, 54, 32)        0         
+conv2d_17 (Conv2D)           (None, 112, 112, 32)      4640      
 _________________________________________________________________
-conv2d_6 (Conv2D)            (None, 53, 53, 64)        8256      
+activation_19 (Activation)   (None, 112, 112, 32)      0         
 _________________________________________________________________
-activation_55 (Activation)   (None, 53, 53, 64)        0         
+batch_normalization_8 (Batch (None, 112, 112, 32)      128       
 _________________________________________________________________
-max_pooling2d_7 (MaxPooling2 (None, 26, 26, 64)        0         
+max_pooling2d_17 (MaxPooling (None, 56, 56, 32)        0         
 _________________________________________________________________
-global_average_pooling2d_2 ( (None, 64)                0         
+dropout_11 (Dropout)         (None, 56, 56, 32)        0         
 _________________________________________________________________
-dropout_2 (Dropout)          (None, 64)                0         
+conv2d_18 (Conv2D)           (None, 56, 56, 64)        8256      
 _________________________________________________________________
-dense_3 (Dense)              (None, 133)               8645      
+activation_20 (Activation)   (None, 56, 56, 64)        0         
 _________________________________________________________________
-activation_56 (Activation)   (None, 133)               0         
+batch_normalization_9 (Batch (None, 56, 56, 64)        256       
+_________________________________________________________________
+max_pooling2d_18 (MaxPooling (None, 28, 28, 64)        0         
+_________________________________________________________________
+global_average_pooling2d_6 ( (None, 64)                0         
+_________________________________________________________________
+dropout_12 (Dropout)         (None, 64)                0         
+_________________________________________________________________
+dense_9 (Dense)              (None, 133)               8645      
+_________________________________________________________________
+activation_21 (Activation)   (None, 133)               0         
 =================================================================
-Total params: 22,325
-Trainable params: 22,325
-Non-trainable params: 0
+Total params: 22,773
+Trainable params: 22,549
+Non-trainable params: 224
 _________________________________________________________________
 </pre>
 </div>
@@ -14154,7 +14342,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
@@ -14176,7 +14364,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">ModelCheckpoint</span>  
@@ -14211,58 +14399,58 @@ _________________________________________________________________
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Train on 6680 samples, validate on 835 samples
 Epoch 1/10
-6680/6680 [==============================] - 160s 24ms/step - loss: 4.8859 - acc: 0.0084 - val_loss: 4.8714 - val_acc: 0.0108
+6680/6680 [==============================] - 471s 71ms/step - loss: 4.8992 - acc: 0.0166 - val_loss: 4.8960 - val_acc: 0.0192
 
-Epoch 00001: val_loss improved from inf to 4.87141, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00001: val_loss improved from inf to 4.89596, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 2/10
-6680/6680 [==============================] - 90s 13ms/step - loss: 4.8734 - acc: 0.0127 - val_loss: 4.8629 - val_acc: 0.0156
+6680/6680 [==============================] - 172s 26ms/step - loss: 4.7557 - acc: 0.0249 - val_loss: 4.7512 - val_acc: 0.0204
 
-Epoch 00002: val_loss improved from 4.87141 to 4.86294, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00002: val_loss improved from 4.89596 to 4.75115, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 3/10
-6680/6680 [==============================] - 91s 14ms/step - loss: 4.8591 - acc: 0.0126 - val_loss: 4.8430 - val_acc: 0.0180
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.6673 - acc: 0.0322 - val_loss: 4.7320 - val_acc: 0.0263
 
-Epoch 00003: val_loss improved from 4.86294 to 4.84299, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00003: val_loss improved from 4.75115 to 4.73197, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 4/10
-6680/6680 [==============================] - 91s 14ms/step - loss: 4.8234 - acc: 0.0154 - val_loss: 4.8048 - val_acc: 0.0192
+6680/6680 [==============================] - 167s 25ms/step - loss: 4.6030 - acc: 0.0350 - val_loss: 4.6988 - val_acc: 0.0251
 
-Epoch 00004: val_loss improved from 4.84299 to 4.80482, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00004: val_loss improved from 4.73197 to 4.69880, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 5/10
-6680/6680 [==============================] - 90s 14ms/step - loss: 4.7834 - acc: 0.0181 - val_loss: 4.7768 - val_acc: 0.0299
+6680/6680 [==============================] - 167s 25ms/step - loss: 4.5450 - acc: 0.0433 - val_loss: 4.6163 - val_acc: 0.0395
 
-Epoch 00005: val_loss improved from 4.80482 to 4.77682, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00005: val_loss improved from 4.69880 to 4.61630, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 6/10
-6680/6680 [==============================] - 92s 14ms/step - loss: 4.7534 - acc: 0.0219 - val_loss: 4.7510 - val_acc: 0.0240
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.4969 - acc: 0.0491 - val_loss: 4.5886 - val_acc: 0.0395
 
-Epoch 00006: val_loss improved from 4.77682 to 4.75100, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00006: val_loss improved from 4.61630 to 4.58859, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 7/10
-6680/6680 [==============================] - 91s 14ms/step - loss: 4.7276 - acc: 0.0211 - val_loss: 4.7361 - val_acc: 0.0287
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.4557 - acc: 0.0533 - val_loss: 4.5415 - val_acc: 0.0383
 
-Epoch 00007: val_loss improved from 4.75100 to 4.73608, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00007: val_loss improved from 4.58859 to 4.54154, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 8/10
-6680/6680 [==============================] - 91s 14ms/step - loss: 4.7034 - acc: 0.0235 - val_loss: 4.7130 - val_acc: 0.0371
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.4098 - acc: 0.0567 - val_loss: 4.5354 - val_acc: 0.0395
 
-Epoch 00008: val_loss improved from 4.73608 to 4.71298, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00008: val_loss improved from 4.54154 to 4.53541, saving model to saved_models/weights.best.from_scratch.hdf5
 Epoch 9/10
-6680/6680 [==============================] - 91s 14ms/step - loss: 4.6765 - acc: 0.0266 - val_loss: 4.6915 - val_acc: 0.0323
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.3680 - acc: 0.0593 - val_loss: 4.5730 - val_acc: 0.0383
 
-Epoch 00009: val_loss improved from 4.71298 to 4.69151, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00009: val_loss did not improve from 4.53541
 Epoch 10/10
-6680/6680 [==============================] - 90s 13ms/step - loss: 4.6526 - acc: 0.0334 - val_loss: 4.6612 - val_acc: 0.0311
+6680/6680 [==============================] - 166s 25ms/step - loss: 4.3339 - acc: 0.0650 - val_loss: 4.6358 - val_acc: 0.0431
 
-Epoch 00010: val_loss improved from 4.69151 to 4.66116, saving model to saved_models/weights.best.from_scratch.hdf5
+Epoch 00010: val_loss did not improve from 4.53541
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[39]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;keras.callbacks.History at 0x1b966e7acc0&gt;</pre>
+<pre>&lt;keras.callbacks.History at 0x253881927f0&gt;</pre>
 </div>
 
 </div>
@@ -14280,7 +14468,7 @@ Epoch 00010: val_loss improved from 4.69151 to 4.66116, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;saved_models/weights.best.from_scratch.hdf5&#39;</span><span class="p">)</span>
@@ -14301,7 +14489,7 @@ Epoch 00010: val_loss improved from 4.69151 to 4.66116, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get index of predicted dog breed for each image in test set</span>
@@ -14718,6 +14906,9 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
+<p>The idea that I followed is the following: model takes the features extracted from the Resnet50 model and feeds thems into a new model which has a Dense layer with 133 breeds to classify into and a softmax activation function. The Global Average Pooling layer is useful to reduce the number of number of features to compute and is an alternative and a better choice over Flattern layer.</p>
+<p>In contrast with a typical CNN (like the one that I built before), which does not offer good kind of results that will satisfy our problem, The results from a model with Transfer Learning  are much more promisising. The implementation uses Resnet50 to transfer the learning to our model, instead of us starting from scratch.</p>
+<p>The initial Resnet50 model, will provide a good starting point, with features, weights etc already tuned with features of objects similiar to one we wish to identify for example human/dog and its breed.</p>
 
 </div>
 </div>
